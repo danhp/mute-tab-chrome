@@ -11,7 +11,9 @@ chrome.commands.onCommand.addListener(function(command) {
         case "mute_tab_all":
             chrome.windows.getCurrent({populate: true}, function(window) {
                 window.tabs.forEach(function(tab) {
-                    chrome.tabs.update(tab.id, {muted: true});
+                    if (tab.audible) {
+                        chrome.tabs.update(tab.id, {muted: true});
+                    }
                 });
             });
             break;
@@ -20,6 +22,17 @@ chrome.commands.onCommand.addListener(function(command) {
             chrome.windows.getCurrent({populate: true}, function(window) {
                 window.tabs.forEach(function(tab) {
                     chrome.tabs.update(tab.id, {muted: false});
+                });
+            });
+            break;
+
+        case "mute_tab_all_except_current":
+            console.log("All but current");
+            chrome.windows.getCurrent({populate: true}, function(window) {
+                window.tabs.forEach(function(tab){
+                    if (!tab.highlighted && tab.audible) {
+                        chrome.tabs.update(tab.id, {muted: true})
+                    }
                 });
             });
             break;
