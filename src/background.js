@@ -4,7 +4,7 @@ chrome.commands.onCommand.addListener(function(command) {
     switch (command) {
         case "mute_tab_current":
             chrome.tabs.getSelected(null, function(tab){
-                chrome.tabs.update(tab.id, {muted: !tab.muted});
+                chrome.tabs.update(tab.id, {muted: !tab.mutedInfo.muted});
             });
             break;
 
