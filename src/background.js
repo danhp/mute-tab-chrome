@@ -1,43 +1,43 @@
-chrome.commands.onCommand.addListener(function(command) {
-    var newIndex;
+'use-strict'
+let stateAllTabs = false;
 
-    switch (command) {
-        case "mute_tab_current":
-            chrome.tabs.getSelected(null, function(tab){
-                chrome.tabs.update(tab.id, {muted: !tab.mutedInfo.muted});
-            });
-            break;
+chrome.commands.onCommand.addListener((command) => {
+	switch (command) {
+		case "mute_tab_current":
+			chrome.tabs.getSelected(null, (tab) => {
+				chrome.tabs.update(tab.id, {muted: !tab.mutedInfo.muted});
+			});
+			break;
 
-        case "mute_tab_all":
-            chrome.windows.getCurrent({populate: true}, function(window) {
-                window.tabs.forEach(function(tab) {
-                    if (tab.audible) {
-                        chrome.tabs.update(tab.id, {muted: true});
-                    }
-                });
-            });
-            break;
+		case "mute_tab_all":
+			stateAllTabs = !stateAllTabs;
+			chrome.windows.getAll({populate: true}, (windowList) => {
+				windowList.forEach((window) => {
+					window.tabs.forEach((tab) => {
+						if (tab.audible || tab.mutedInfo.muted) {
+							chrome.tabs.update(tab.id, {muted: stateAllTabs});
+						}
+					});
+				});
+			});
+			break;
 
-        case "mute_tab_unmute_all":
-            chrome.windows.getCurrent({populate: true}, function(window) {
-                window.tabs.forEach(function(tab) {
-                    chrome.tabs.update(tab.id, {muted: false});
-                });
-            });
-            break;
+		case "mute_tab_all_except_current":
+			chrome.windows.getAll({populate: true}, (windowList) => {
+				windowList.forEach((window) => {
+					window.tabs.forEach((tab) => {
+						if (tab.audible) {
+							chrome.tabs.update(tab.id, {muted: true})
+						}
+					});
+				});
+			});
+			chrome.tabs.getSelected(null, (tab) => {
+				chrome.tabs.update(tab.id, {muted: false});
+			});
+			break;
 
-        case "mute_tab_all_except_current":
-            console.log("All but current");
-            chrome.windows.getCurrent({populate: true}, function(window) {
-                window.tabs.forEach(function(tab){
-                    if (!tab.highlighted && tab.audible) {
-                        chrome.tabs.update(tab.id, {muted: true})
-                    }
-                });
-            });
-            break;
-
-        default:
-            break;
-    }
+		default:
+			break;
+	}
 });

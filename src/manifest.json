@@ -21,19 +21,13 @@
             }
         },
         "mute_tab_all": {
-            "description": "Mute all audible tabs in current window.",
+            "description": "Mute/Unmute all audible tabs.",
             "suggested_key": {
                 "default": "Alt+Shift+Comma"
             }
         },
-        "mute_tab_unmute_all": {
-            "description": "Unmute all tabs in current window",
-            "suggested_key": {
-                "default": "Alt+Shift+Period"
-            }
-        },
         "mute_tab_all_except_current": {
-            "description": "Mute all audible tabs in current window except current",
+            "description": "Mute all audible tabs except current",
             "suggested_key": {
                 "default": "Alt+Shift+N"
             }
