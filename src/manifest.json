@@ -2,7 +2,7 @@
     "manifest_version": 2,
 
     "name": "Mute Tab Shortcuts",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Quickly mute tabs with keyboard shortcuts",
     "icons": {
         "16": "imgs/16.png",
