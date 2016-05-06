@@ -9,10 +9,13 @@ You have music playing in one tab. You open another website that also plays musi
 ## Install
 
 1. Install the extension from [Chrome Webstore](https://chrome.google.com/webstore/detail/mute-tab-shortcuts/opcjanmpjbdbdpnjfjbboacibokblbhl)
-2. Enable the "Tab audio muting UI control" in [chrome://flags](chrome://flags). Extension uses this experimental feature (as of Chrome 51).
+2. Enable the "Tab audio muting UI control" in
+chrome://flags/. Extension uses this
+experimental feature (as of Chrome 51). Quick access at
+[chrome://flags/#enable-tab-audio-muting](chrome://flags/#enable-tab-audio-muting)
 
 ![](https://cloud.githubusercontent.com/assets/2384694/15074973/57019966-13a2-11e6-834e-3362074c5d16.png)
 
 ## Licence
 
-MIT © [Daniel Pham](https://phamdaniel.github.io)
+MIT © [Daniel Pham](https://danhp.github.io)
