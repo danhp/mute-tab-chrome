@@ -1,18 +1,18 @@
 # <img src="src/imgs/128.png" width="30"> Chrome Mute tabs
 
-> Quickly mute tabs with keyboard shortcuts.
+You have music playing in one tab. You open another website that also plays music. You don't have to listen this awful mix anymore, since you can mute tabs with shortcuts. And unmute them back too!
 
-![](screenshot.png)
+![](https://cloud.githubusercontent.com/assets/3745612/15074638/11be2876-136e-11e6-9d4b-8bed4e7adf5d.png)
 
 ![](screenshot_2.png)
 
 ## Install
 
-- [Chrome Webstore](https://chrome.google.com/webstore/detail/mute-tab-shortcuts/opcjanmpjbdbdpnjfjbboacibokblbhl)
+1. Install the extension from [Chrome Webstore](https://chrome.google.com/webstore/detail/mute-tab-shortcuts/opcjanmpjbdbdpnjfjbboacibokblbhl)
+2. Enable the "Tab audio muting UI control" in [chrome://flags](chrome://flags). Extension uses this experimental feature (as of Chrome 51).
 
-In order for the extension to function properly (as of Chrome 45), you need to enable the "Enable tab audio muting UI control" in [chrome://flags](chrome://flags)
+![](https://cloud.githubusercontent.com/assets/2384694/15074973/57019966-13a2-11e6-834e-3362074c5d16.png)
 
-![](flag.png)
+## Licence
 
-## Liscence
 MIT © [Daniel Pham](https://phamdaniel.github.io)
