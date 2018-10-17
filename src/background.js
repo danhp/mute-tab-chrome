@@ -4,36 +4,29 @@ let stateAllTabs = false;
 chrome.commands.onCommand.addListener(command => {
 	switch (command) {
 		case "mute_tab_current":
-			chrome.tabs.getSelected(null, tab => {
-				chrome.tabs.update(tab.id, {muted: !tab.mutedInfo.muted});
+			chrome.tabs.query({ active: true, lastFocusedWindow: true }, ([currentTab]) => {
+				chrome.tabs.update(currentTab.id, { muted: !currentTab.mutedInfo.muted });
 			});
 			break;
 
 		case "mute_tab_all":
 			stateAllTabs = !stateAllTabs;
-			chrome.windows.getAll({populate: true}, windowList => {
-				windowList.forEach(window => {
-					window.tabs.forEach(tab => {
-						if (tab.audible || tab.mutedInfo.muted) {
-							chrome.tabs.update(tab.id, {muted: stateAllTabs});
-						}
+			chrome.tabs.query({}, tabs => {
+				tabs
+					.filter(tab => tab.audible || tab.mutedInfo.muted)
+					.forEach(tab => {
+						chrome.tabs.update(tab.id, { muted: stateAllTabs });
 					});
-				});
-			});
+			})
 			break;
 
 		case "mute_tab_all_except_current":
-			chrome.windows.getAll({populate: true}, windowList => {
-				windowList.forEach(window => {
-					window.tabs.forEach(tab => {
-						if (tab.audible) {
-							chrome.tabs.update(tab.id, {muted: true})
-						}
+			chrome.tabs.query({}, tabs => {
+				tabs
+					.filter(tab => ((!tab.active) && tab.audible))
+					.forEach(tab => {
+						chrome.tabs.update(tab.id, { muted: true })
 					});
-				});
-			});
-			chrome.tabs.getSelected(null, tab => {
-				chrome.tabs.update(tab.id, {muted: false});
 			});
 			break;
 
